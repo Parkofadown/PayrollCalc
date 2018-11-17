@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void manager() 
+{
+	double weeklySalary;
+
+
+	printf("Enter your weekly salary: ");
+	scanf_s("%lf", &weeklySalary);
+	printf("Your weekly pay is: %.2lf\n", weeklySalary);
+
+	return;
+}
+
+void hourlyWorker() 
+{
+	double hourlyWorkerSalary;
+	double hoursWorked;
+	double hourlyRate;
+	double ot;
+
+
+	printf("Enter hourly rate: ");
+	scanf_s("%lf", &hourlyRate);
+	printf("Enter number of hours worked in a week: ");
+	scanf_s("%lf", &hoursWorked);
+
+	if (hoursWorked > 40)
+	{
+		ot = (hoursWorked - 40) * (hourlyRate * 1.5);
+		hourlyWorkerSalary = hoursWorked * hourlyRate + ot;
+		printf("Hourly worker earned: %.2lf\n", hourlyWorkerSalary);
+	}else
+	{
+		hourlyWorkerSalary = hoursWorked * hourlyRate;
+		printf("Hourly worker earned: %.2lf\n",hourlyWorkerSalary);
+	}
+
+	return;
+}
+
+void commissionWorker()
+{
+	double baseRate = 250;
+	double weeklySales;
+	double salary;
+
+
+	printf("How many sales were made this week?: ");
+	scanf_s("%lf", &weeklySales);
+	salary = baseRate + (0.057 * weeklySales);
+
+	printf("The commission worker earned: %.2lf\n", salary);
+
+	return;
+
+}
+
+void pieceWorker()
+{
+	double piecesMade;
+	double totalMoney;
+	double perPieceMoney;
+
+
+	printf("How many pieces were made in a week?: ");
+	scanf_s("%lf", &piecesMade);
+	printf("How much money was earned per piece: ");
+	scanf_s("%lf" , &perPieceMoney);
+	totalMoney = piecesMade * perPieceMoney;
+	printf("The piecemaker earned: %.2lf\n",totalMoney);
+
+	return;
+}
+
+int main()
+{
+	int employeePayCode;
+	int hourlyWorkerCount = 0;
+	int pieceWorkerCount = 0;
+	int commissionWorkerCount = 0;
+	int managerCount = 0;
+
+	printf("Enter employee code (1, 2, 3, 4) or (-1) to exit: ");
+	scanf_s("%d",&employeePayCode);
+	while (employeePayCode != -1)
+	{
+		if (employeePayCode == 1)
+		{
+			managerCount++;
+			manager();
+		}
+		else if (employeePayCode == 2)
+		{
+			hourlyWorkerCount++;
+			hourlyWorker();
+		}
+		else if (employeePayCode == 3)
+		{
+			commissionWorkerCount++;
+			commissionWorker();
+		}
+		else if (employeePayCode == 4)
+		{
+			pieceWorkerCount++;
+			pieceWorker();
+		}
+		else
+		{
+			printf("You have entered an invalid key, try again!\n");
+		}
+
+
+		printf("Enter employee code (1, 2, 3, 4) or (-1) to exit ");
+		scanf_s("%d",&employeePayCode);
+	}
+	printf("You have entered %d Managers\n", managerCount);
+	printf("You have entered %d Hourly Workers\n", hourlyWorkerCount);
+	printf("You have entered %d Commission Workers\n", commissionWorkerCount);
+	printf("You have entered %d Piece Workers\n", pieceWorkerCount);
+
+	return 0;
+}
